@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Models\Privilege;
 use App\Models\User;
 use App\Traits\ApiResponser;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,15 @@ class UserController extends Controller
     public function register(RegisterRequest $request)
     {
         $attr = $request->validated();
+
+        $privilege = Depa::where('manage_access_code', $attr['access_code'])->first();
+
+
+        $privilege = Privilege::where('manage_access_code', $attr['access_code'])->first();
+
+        if (empty($privilege)) {
+            return $this->error('Invalid Access Code', 401);
+        }
 
         User::create($attr);
 

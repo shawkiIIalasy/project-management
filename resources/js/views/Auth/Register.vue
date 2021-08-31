@@ -43,6 +43,13 @@
                                            required autocomplete="off">
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="access_code" class="col-md-4 col-form-label text-md-right">Access Code</label>
+                                <div class="col-md-6">
+                                    <input id="access_code" type="password" class="form-control" v-model="access_code"
+                                           required autocomplete="off">
+                                </div>
+                            </div>
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
@@ -72,6 +79,7 @@ export default {
             last_name: "",
             email: "",
             password: "",
+            access_code: "",
             error: null
         }
     },
@@ -85,7 +93,8 @@ export default {
                 first_name: this.first_name,
                 last_name: this.last_name,
                 email: this.email,
-                password: this.password
+                password: this.password,
+                access_code: this.access_code
             }).then(
                 (data) => {
                     this.$router.push('/login')
