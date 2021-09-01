@@ -19,4 +19,9 @@ class Privilege extends Model
         'code',
         'manage_access_code'
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

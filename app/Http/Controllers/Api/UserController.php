@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Models\Department;
 use App\Models\Privilege;
 use App\Models\User;
 use App\Traits\ApiResponser;
@@ -21,14 +22,14 @@ class UserController extends Controller
     {
         $attr = $request->validated();
 
-        $privilege = Depa::where('manage_access_code', $attr['access_code'])->first();
+        $privilegeEmployee = Department::where('access_code', $attr['access_code'])->first();
+        $privilegeManager = Privilege::where('manage_access_code', $attr['access_code'])->first();
 
-
-        $privilege = Privilege::where('manage_access_code', $attr['access_code'])->first();
-
-        if (empty($privilege)) {
-            return $this->error('Invalid Access Code', 401);
+        if (empty($privilegeEmployee) && empty($privilegeManager)) {
+            return $this->error('Access code invalid', 401);
         }
+
+        $attr['privilege_id'] = ! empty($privilegeEmployee) ? $privilegeEmployee->id : $privilegeManager->id;
 
         User::create($attr);
 
@@ -43,10 +44,6 @@ class UserController extends Controller
 
         if (! Auth::attempt($request->only(['email', 'password']))) {
             return $this->error('Credentials not match', 401);
-        }
-
-        if (auth()->user()->active == false) {
-            return $this->error('User not active', 401);
         }
 
         return $this->success([

@@ -23,6 +23,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'privilege_id'
     ];
 
     /**
@@ -51,5 +52,10 @@ class User extends Authenticatable
     {
 
         $this->attributes['password'] = Hash::make($password);
+    }
+
+    public function privilege()
+    {
+        return $this->hasOne(Privilege::class);
     }
 }

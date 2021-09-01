@@ -1,30 +1,17 @@
 <template>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container">
-                <router-link :to="{name: 'Home'}" class="navbar-brand d-inline-block">
-                    <h5 class="d-inline-block">Project Management - Dashboard</h5>
-                </router-link>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav navbar-main me-auto mb-2 mb-lg-0">
+    <header class="header" id="header">
+        <div class="header_toggle"><i class='fa fa-bars' id="header-toggle"></i></div>
 
-                    </ul>
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <router-link class="nav-link btn btn-tab" :to="{name: 'Home'}">Home</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn btn-tab" @click="logout()">Logout</a>
-                        </li>
-                    </ul>
+        <div class="dropdown">
+            <a class="" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="header_img">
+                    <img src="/images/user.png" alt="">
                 </div>
-            </div>
-        </nav>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" @click="logout">logout</a></li>
+            </ul>
+        </div>
     </header>
 </template>
 
