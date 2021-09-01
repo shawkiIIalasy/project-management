@@ -28,16 +28,28 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('isManager', function (User $user) {
-            return $user->privilege()->whereNotNull('manage_access_code')
+        Gate::define('index', function (User $user) {
+            return $user->privilege && !empty($user->privilege->manage_access_code)
                 ? Response::allow()
-                : Response::deny('You must be an administrator.');
+                : Response::deny('You don\'t have access to this location.');
         });
 
-        Gate::define('isEmployee', function (User $user) {
-            return $user->department()->whereNotNull('access_code')
+        Gate::define('store', function (User $user) {
+            return $user->privilege && !empty($user->privilege->manage_access_code)
                 ? Response::allow()
-                : Response::deny('You must be an administrator.');
+                : Response::deny('You don\'t have access to this location.');
+        });
+
+        Gate::define('update', function (User $user) {
+            return $user->privilege && !empty($user->privilege->manage_access_code)
+                ? Response::allow()
+                : Response::deny('You don\'t have access to this location.');
+        });
+
+        Gate::define('show', function (User $user) {
+            return $user->department || $user->privilege && !empty($user->privilege->manage_access_code)
+                ? Response::allow()
+                : Response::deny('You don\'t have access to this location.');
         });
     }
 }

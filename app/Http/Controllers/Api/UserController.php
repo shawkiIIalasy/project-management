@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         $attr = $request->validated();
 
-        $privilegeEmployee = Department::where('access_code', $attr['access_code'])->first();
+        $privilegeEmployee = Privilege::where('access_code', $attr['access_code'])->first();
         $privilegeManager = Privilege::where('manage_access_code', $attr['access_code'])->first();
 
         if (empty($privilegeEmployee) && empty($privilegeManager)) {

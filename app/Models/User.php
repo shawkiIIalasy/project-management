@@ -56,11 +56,11 @@ class User extends Authenticatable
 
     public function privilege()
     {
-        return $this->hasOne(Privilege::class);
+        return $this->belongsTo(Privilege::class);
     }
 
     public function department()
     {
-        return $this->hasOne(Department::class);
+        return $this->belongsTo(Department::class);
     }
 }
