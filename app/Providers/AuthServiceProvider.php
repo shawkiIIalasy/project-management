@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Privilege;
+use App\Models\Manage;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -29,25 +29,25 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('index', function (User $user) {
-            return $user->privilege && !empty($user->privilege->manage_access_code)
+            return !empty(!empty($user->manage_id))
                 ? Response::allow()
                 : Response::deny('You don\'t have access to this location.');
         });
 
         Gate::define('store', function (User $user) {
-            return $user->privilege && !empty($user->privilege->manage_access_code)
+            return !empty($user->manage_id)
                 ? Response::allow()
                 : Response::deny('You don\'t have access to this location.');
         });
 
         Gate::define('update', function (User $user) {
-            return $user->privilege && !empty($user->privilege->manage_access_code)
+            return !empty($user->manage_id)
                 ? Response::allow()
                 : Response::deny('You don\'t have access to this location.');
         });
 
         Gate::define('show', function (User $user) {
-            return $user->department || $user->privilege && !empty($user->privilege->manage_access_code)
+            return empty($user->manage_id) || !empty($user->manage_id)
                 ? Response::allow()
                 : Response::deny('You don\'t have access to this location.');
         });

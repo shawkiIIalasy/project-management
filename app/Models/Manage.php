@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Privilege extends Model
+class Manage extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    protected $table = 'manage';
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +22,8 @@ class Privilege extends Model
         'code',
         'manage_access_code'
     ];
+
+    protected $dates = ['deleted_at'];
 
     public function users()
     {

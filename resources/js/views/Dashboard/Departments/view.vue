@@ -8,7 +8,9 @@
             <p>Description: {{data.department.description}}</p>
             <div>
                 <ul>
-                    <li v-for="user in data.users"></li>
+                    <li v-for="user in data.users">
+                        {{user.email}}
+                    </li>
                 </ul>
             </div>
         </div>
