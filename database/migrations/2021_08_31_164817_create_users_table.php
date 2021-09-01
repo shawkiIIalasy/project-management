@@ -18,13 +18,13 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->unsignedBigInteger('privilege_id')->nullable(false);
+            $table->unsignedBigInteger('manage_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('privilege_id')->references('id')->on('privileges')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('manage_id')->references('id')->on('manage')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
