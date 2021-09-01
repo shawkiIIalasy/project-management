@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\Department;
-use App\Models\Privilege;
+use App\Models\Manage;
 use App\Models\User;
 use App\Traits\ApiResponser;
 use Illuminate\Support\Facades\Auth;
@@ -22,17 +22,23 @@ class UserController extends Controller
     {
         $attr = $request->validated();
 
-        $privilegeEmployee = Department::where('access_code', $attr['access_code'])->first();
-        $privilegeManager = Privilege::where('manage_access_code', $attr['access_code'])->first();
+        $manage = Manage::where('access_code', $attr['access_code'])->first();
+        $department = Department::where('access_code', $attr['access_code'])->first();
 
-        if (empty($privilegeEmployee) && empty($privilegeManager)) {
+        if (empty($manage) && empty($department)) {
             return $this->error('Access code invalid', 401);
         }
 
-        $attr['privilege_id'] = ! empty($privilegeEmployee) ? $privilegeEmployee->id : $privilegeManager->id;
+        if(!empty($manage)){
+            $attr['manage_id'] = $manage->id;
+        }
 
-        User::create($attr);
+        $user = User::create($attr);
+        if(!empty($department)){
+            $department->users()->save($user);
+        }
 
+        !empty($manage) ? $manage->delete(): false;
         return $this->success([]);
     }
 

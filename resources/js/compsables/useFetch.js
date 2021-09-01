@@ -21,10 +21,10 @@ const useFetch = (url, config = {}) => {
                 ...config
             })
             response.value = result
-            data.value = result.data
+            data.value = result.data.data
             success.value = true
         } catch (e) {
-            error.value = e
+            error.value = e.response.data
             loading.value = false
             success.value = false
         } finally {

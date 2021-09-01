@@ -23,7 +23,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
-        'privilege_id'
+        'manage_id'
     ];
 
     /**
@@ -56,6 +56,11 @@ class User extends Authenticatable
 
     public function privilege()
     {
-        return $this->hasOne(Privilege::class);
+        return $this->belongsTo(Manage::class);
+    }
+
+    public function department()
+    {
+        return $this->hasOne(Department::class);
     }
 }

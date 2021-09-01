@@ -3,7 +3,7 @@
         <Dashboard-Header></Dashboard-Header>
         <Dashboard-Side-Bar></Dashboard-Side-Bar>
 
-        <div class="height-100 bg-light">
+        <div class="height-100 bg-light p-5">
             <slot></slot>
         </div>
     </div>
@@ -40,7 +40,6 @@ export default {
 
         /*===== LINK ACTIVE =====*/
         const linkColor = document.querySelectorAll('.nav_link')
-        console.log(linkColor)
 
         function colorLink() {
             if (linkColor) {
