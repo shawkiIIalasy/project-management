@@ -17,7 +17,7 @@ class CreateDepartmentsTable extends Migration
             $table->id();
             $table->string('name')->nullable(false)->unique();
             $table->string('description')->nullable();
-            $table->string('access_code')->unique()->nullable();
+            $table->string('access_code')->unique()->nullable(false);
             $table->unsignedBigInteger('created_by_user_id')->nullable(false);
             $table->timestamps();
 
