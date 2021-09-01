@@ -7,9 +7,9 @@
                     <a href="#" class="nav_link"> <i class='fa fa-project-diagram nav_icon'></i>
                         <span class="nav_name">Projects</span>
                     </a>
-                    <a href="#" class="nav_link"> <i class='fa fa-building nav_icon'></i>
+                    <router-link :to="{name: 'Departments'}" class="nav_link"> <i class='fa fa-building nav_icon'></i>
                         <span class="nav_name">Departments</span>
-                    </a>
+                    </router-link>
                     <a href="#" class="nav_link"> <i class='fa fa-users nav_icon'></i>
                         <span class="nav_name">Employees</span>
                     </a>

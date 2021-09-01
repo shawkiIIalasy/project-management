@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Privilege;
 use App\Models\User;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -28,8 +29,15 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('isManager', function (User $user) {
-            var_dump($user->privilege()->whereNotNull('manage_access_code'));die();
-            return true;
+            return $user->privilege()->whereNotNull('manage_access_code')
+                ? Response::allow()
+                : Response::deny('You must be an administrator.');
+        });
+
+        Gate::define('isEmployee', function (User $user) {
+            return $user->department()->whereNotNull('access_code')
+                ? Response::allow()
+                : Response::deny('You must be an administrator.');
         });
     }
 }

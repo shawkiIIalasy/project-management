@@ -32,6 +32,18 @@ const routes = [
         component: () => import('../views/Dashboard/index')
     },
     {
+        path: '/departments',
+        name: 'Departments',
+        beforeEnter: Authenticated,
+        component: () => import('../views/Dashboard/Departments/index')
+    },
+    {
+        path: '/departments/create',
+        name: 'DepartmentCreate',
+        beforeEnter: Authenticated,
+        component: () => import('../views/Dashboard/Departments/create')
+    },
+    {
         path: '/login',
         name: 'Login',
         beforeEnter: LoggedIn,
