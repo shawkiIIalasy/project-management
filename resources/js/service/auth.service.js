@@ -13,7 +13,7 @@ class AuthService {
                         if (response.data.data.access_token) {
                             localStorage.setItem('user', JSON.stringify(response.data.data));
                         }
-                        return response.data;
+                        return response.data.data;
                     })
             })
     }
@@ -25,7 +25,7 @@ class AuthService {
                 return axiosInstance.post('/logout')
                     .then(response => {
                         localStorage.removeItem('user');
-                        return response.data;
+                        return response.data.data;
                     })
             })
     }

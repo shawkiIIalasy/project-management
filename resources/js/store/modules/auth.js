@@ -27,7 +27,7 @@ export const auth = {
         authenticated({commit}) {
             AuthService.authenticated().then(
                 response => {
-                    commit('authenticated')
+                    commit('authenticated', response.data)
                     return Promise.resolve(response.data)
                 },
                 error => {
@@ -68,7 +68,7 @@ export const auth = {
         registerFailure(state) {
             state.status.loggedIn = false
         },
-        authenticated(state) {
+        authenticated(state, data) {
             state.status.loggedIn = true
         },
         unAuthenticated(state) {

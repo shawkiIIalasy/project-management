@@ -53,7 +53,8 @@ class UserController extends Controller
         }
 
         return $this->success([
-            'access_token' => auth()->user()->createToken('access_token')->plainTextToken
+            'access_token' => auth()->user()->createToken('access_token')->plainTextToken,
+            'is_manager' => !empty(auth()->user()->manage_id)
         ]);
     }
 
@@ -69,7 +70,8 @@ class UserController extends Controller
     public function authenticated()
     {
         return $this->success([
-            'message' => 'User authenticated'
+            'message' => 'User authenticated',
+            'is_manager' => !empty(auth()->user()->manage_id)
         ]);
     }
 }

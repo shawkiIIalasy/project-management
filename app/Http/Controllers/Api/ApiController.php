@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Gate;
 
 class ApiController extends Controller
 {
+    protected $paginate = 1;
+
     public function __construct()
     {
         $this->middleware('auth:sanctum');

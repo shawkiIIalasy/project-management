@@ -6,6 +6,7 @@ use App\Http\Requests\DepartmentRequest;
 use App\Models\Department;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 
 class DepartmentController extends ApiController
@@ -19,7 +20,7 @@ class DepartmentController extends ApiController
 
     public function index()
     {
-        $departments = Department::all();
+        $departments = Department::paginate(request()->all());
 
         return $this->success($departments, 200);
     }
@@ -42,5 +43,14 @@ class DepartmentController extends ApiController
         Department::create($attr);
 
         return $this->success([], 'Department created.', 201);
+    }
+
+    public function update($id, DepartmentRequest $request)
+    {
+        $attr = $request->validated();
+
+        $department = Department::where('id' , '=', $id)->update($attr);
+
+        return $this->success($department, 'Department updated.', 200);
     }
 }

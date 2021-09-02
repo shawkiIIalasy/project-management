@@ -4,15 +4,18 @@
         <div class="alert alert-danger" role="alert" v-if="error !== null">
             {{ error.message }}
         </div>
-        <h3>Create Department</h3>
-        <form @submit.prevent="create">
+        <h3>Update Department</h3>
+        <form @submit.prevent="update">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" v-model="name" :class="{'form-control':true, 'is-invalid': error !== null && error.errors !== null && error.errors.name !== null}" id="name" aria-describedby="nameHelp">
-                <div class="invalid-feedback" v-if="error !== null && error.errors !== null && error.errors.name !== null">
+                <input type="text" v-model="name"
+                       :class="{'form-control':true, 'is-invalid': error !== null && error.errors !== null && error.errors.name !== null}"
+                       id="name" aria-describedby="nameHelp">
+                <div class="invalid-feedback"
+                     v-if="error !== null && error.errors !== null && error.errors.name !== null">
                     <ul>
                         <li v-for="error in error.errors.name">
-                            {{error}}
+                            {{ error }}
                         </li>
                     </ul>
                 </div>
@@ -20,11 +23,14 @@
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea :class="{'form-control':true, 'is-invalid': error !== null && error.errors !== null && error.errors.description !== null}" v-model="description" id="description" rows="3"></textarea>
-                <div class="invalid-feedback" v-if="error !== null && error.errors !== null && error.errors.description !== null">
+                <textarea
+                    :class="{'form-control':true, 'is-invalid': error !== null && error.errors !== null && error.errors.description !== null}"
+                    v-model="description" id="description" rows="3"></textarea>
+                <div class="invalid-feedback"
+                     v-if="error !== null && error.errors !== null && error.errors.description !== null">
                     <ul>
                         <li v-for="error in error.errors.description">
-                            {{error}}
+                            {{ error }}
                         </li>
                     </ul>
                 </div>
@@ -37,9 +43,10 @@
 <script>
 import DashboardLayout from '../../../layouts/DashboardLayout'
 import usePost from '../../../compsables/usePost'
+import useFetch from '../../../compsables/useFetch'
 
 export default {
-    name: 'DepartmentCreate',
+    name: 'DepartmentUpdate',
     components: {
         DashboardLayout
     },
@@ -50,9 +57,21 @@ export default {
             error: null
         }
     },
+    created() {
+        const {fetchHandel} = useFetch('/departments/' + this.$route.params.id, {skip: true})
+        fetchHandel().then(
+            response => {
+                this.name = response.data.data.department.name
+                this.description = response.data.data.department.description
+            },
+            error => {
+                this.error = error.response.data
+            }
+        )
+    },
     methods: {
-        async create() {
-            const {post} = usePost('/departments');
+        async update() {
+            const {post} = usePost('/departments/' + this.$route.params.id);
             post({
                 name: this.name,
                 description: this.description

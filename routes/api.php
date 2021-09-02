@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth:sanctum', 'json.response']], function () {
 
     Route::get('departments', [DepartmentController::class, 'index']);
     Route::post('departments', [DepartmentController::class, 'store']);
+    Route::post('departments/{id}', [DepartmentController::class, 'update']);
     Route::get('departments/{id}', [DepartmentController::class, 'show']);
 
 });
