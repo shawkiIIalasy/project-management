@@ -9,6 +9,12 @@
         </div>
         <div v-else-if="data !== null">
             <h3>Projects</h3>
+
+            <div class="row">
+                <input type="text" v-model="searchField" class="form-control mt-3 mb-5"
+                       placeholder="Search by project name" @keyup="search">
+            </div>
+
             <div class="row">
                 <div class="card rounded col-xl-3 col-lg-3 col-md-2 col-sm-1 m-3 p-3" v-for="project in data.data">
                     <div class="card-header bg-white text-end">
@@ -26,8 +32,8 @@
                     </div>
                 </div>
             </div>
-            <v-pagination
 
+            <v-pagination
                 v-model="data.current_page"
                 :pages="data.total"
                 :range-size="data.per_page"
@@ -50,9 +56,41 @@ export default {
         DashboardLayout,
         VPagination
     },
-    setup() {
-        const {data, loading, error} = useFetch('/projects');
-        return {data, loading, error}
+    created() {
+        this.fetchAll()
+    },
+    data() {
+        return {
+            searchField: '',
+            data: null,
+            error: null
+        }
+    },
+    methods: {
+        search(e) {
+            if (this.searchField.length >= 3) {
+                const searchRequest = useFetch('/projects?search=' + this.searchField, {skip: true})
+                searchRequest.fetchHandel().then(response => {
+                        this.data = response.data.data
+                    },
+                    error => {
+                        this.error = error.response.data
+                    }
+                )
+            } else {
+                this.fetchAll()
+            }
+        },
+        fetchAll() {
+            const fetchRequest = useFetch('/projects', {skip: true});
+            fetchRequest.fetchHandel().then(response => {
+                    this.data = response.data.data
+                },
+                error => {
+                    this.error = error.response.data
+                }
+            )
+        }
     }
 }
 </script>

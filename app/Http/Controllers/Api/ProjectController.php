@@ -20,7 +20,13 @@ class ProjectController extends ApiController
 
     public function index()
     {
-        $projects = Project::paginate(request()->all());
+
+        $projects = Project::query();
+        if(!empty(request()->search)){
+            $projects = $projects->where('name','LIKE','%'.request()->search.'%');
+            request()->offsetUnset('search');
+        }
+        $projects = $projects->paginate(request()->all());
 
         return $this->success($projects, 200);
     }

@@ -8,6 +8,12 @@
         </div>
         <div v-else-if="data !== null">
             <h3>Departments</h3>
+
+            <div class="row">
+                <input type="text" v-model="searchField" class="form-control mt-3 mb-5"
+                       placeholder="Search by department name" @keyup="search">
+            </div>
+
             <div class="row">
                 <div class="card rounded col-xl-3 col-lg-3 col-md-2 col-sm-1 m-3 p-3" v-for="department in data.data">
                     <div class="card-header bg-white text-end">
@@ -49,9 +55,41 @@ export default {
         DashboardLayout,
         VPagination
     },
-    setup() {
-        const {data, loading, error} = useFetch('/departments');
-        return {data, loading, error}
+    data() {
+        return {
+            searchField: '',
+            data: null,
+            error: null
+        }
+    },
+    created() {
+        this.fetchAll()
+    },
+    methods: {
+        search(e) {
+            if (this.searchField.length >= 3) {
+                const searchRequest = useFetch('/departments?search=' + this.searchField, {skip: true})
+                searchRequest.fetchHandel().then(response => {
+                        this.data = response.data.data
+                    },
+                    error => {
+                        this.error = error.response.data
+                    }
+                )
+            } else {
+                this.fetchAll()
+            }
+        },
+        fetchAll() {
+            const fetchRequest = useFetch('/departments', {skip: true});
+            fetchRequest.fetchHandel().then(response => {
+                    this.data = response.data.data
+                },
+                error => {
+                    this.error = error.response.data
+                }
+            )
+        }
     }
 }
 </script>
