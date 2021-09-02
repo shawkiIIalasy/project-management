@@ -61,8 +61,32 @@ const routes = [
     {
         path: '/departments/:id/edit',
         name: 'DepartmentUpdate',
-        beforeEnter: Authenticated,
+        beforeEnter: AuthenticatedManager,
         component: () => import('../views/Dashboard/Departments/update')
+    },
+    {
+        path: '/projects',
+        name: 'Projects',
+        beforeEnter: AuthenticatedManager,
+        component: () => import('../views/Dashboard/Projects/index')
+    },
+    {
+        path: '/projects/create',
+        name: 'ProjectCreate',
+        beforeEnter: AuthenticatedManager,
+        component: () => import('../views/Dashboard/Projects/create')
+    },
+    {
+        path: '/projects/:id',
+        name: 'ProjectView',
+        beforeEnter: Authenticated,
+        component: () => import('../views/Dashboard/Projects/view')
+    },
+    {
+        path: '/projects/:id/edit',
+        name: 'ProjectUpdate',
+        beforeEnter: AuthenticatedManager,
+        component: () => import('../views/Dashboard/Projects/update')
     },
     {
         path: '/login',
