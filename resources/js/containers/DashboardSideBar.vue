@@ -5,9 +5,10 @@
                 class="nav_logo-name">Project Management</span>
             </a>
                 <div class="nav_list">
-                    <a href="#" class="nav_link"> <i class='fa fa-project-diagram nav_icon'></i>
+                    <router-link  :to="{name: 'Projects'}" class="nav_link">
+                        <i class='fa fa-project-diagram nav_icon'></i>
                         <span class="nav_name">Projects</span>
-                    </a>
+                    </router-link>
                     <router-link v-show="isManager" :to="{name: 'Departments'}" class="nav_link">
                         <i class='fa fa-building nav_icon'></i>
                         <span class="nav_name">Departments</span>

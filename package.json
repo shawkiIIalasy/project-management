@@ -27,6 +27,7 @@
         "vuex": "^4.0.2"
     },
     "dependencies": {
-        "@hennge/vue3-pagination": "^1.0.17"
+        "@hennge/vue3-pagination": "^1.0.17",
+        "@suadelabs/vue3-multiselect": "^1.0.2"
     }
 }

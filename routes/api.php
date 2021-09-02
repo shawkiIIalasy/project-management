@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\DepartmentController;
+use App\Http\Controllers\Api\EmployeeController;
+use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,5 +30,13 @@ Route::group(['middleware' => ['auth:sanctum', 'json.response']], function () {
     Route::post('departments', [DepartmentController::class, 'store']);
     Route::post('departments/{id}', [DepartmentController::class, 'update']);
     Route::get('departments/{id}', [DepartmentController::class, 'show']);
+
+    Route::get('projects', [ProjectController::class, 'index']);
+    Route::post('projects', [ProjectController::class, 'store']);
+    Route::post('projects/{id}', [ProjectController::class, 'update']);
+    Route::get('projects/{id}', [ProjectController::class, 'show']);
+
+    Route::get('employees', [EmployeeController::class, 'index']);
+    Route::get('employees/list', [EmployeeController::class, 'list']);
 
 });
