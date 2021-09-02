@@ -1,5 +1,9 @@
 <template>
     <Dashboard-Layout>
+        <router-link :to="{name: 'EmployeeCreate'}" class="btn btn-primary fa fa-plus-square mb-5">
+            Create
+        </router-link>
+
         <div class="alert alert-danger" role="alert" v-if="error !== null">
             {{ error.message }}
         </div>
@@ -7,9 +11,17 @@
             <h3>Employees</h3>
             <div class="row">
                 <div class="card rounded col-12 m-3 p-3" v-for="employee in data.data">
+                    <div class="card-header bg-white text-end">
+                        <router-link :to="'/employees/'+employee.id+'/edit'">
+                            <span class="fa fa-edit"></span>
+                        </router-link>
+                    </div>
                     <div class="card-body">
+                        <router-link :to="'/employees/' + employee.id">
                         <h5 class="card-title">{{ employee.first_name }}  {{ employee.last_name }}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{ employee.email }}</h6>
+                            <span class="fa fa-arrow-right"></span>
+                        </router-link>
                     </div>
                 </div>
             </div>

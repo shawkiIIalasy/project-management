@@ -89,7 +89,7 @@ export default {
             response => {
                 this.name = response.data.data.project.name
                 this.description = response.data.data.project.description
-                this.value = this.prepareSelectData(response.data.data.users)
+                this.value = this.prepareSelectedData(response.data.data.users)
             },
             error => {
                 this.error = error.response.data
@@ -114,6 +114,13 @@ export default {
             const list = []
             for(let item in items){
                 list.push({'id': item, 'email': items[item] })
+            }
+            return list
+        },
+        prepareSelectedData(items){
+            const list = []
+            for(let item in items){
+                list.push({'id': items[item]['id'], 'email': items[item]['email'] })
             }
             return list
         }

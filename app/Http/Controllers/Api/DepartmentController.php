@@ -25,6 +25,14 @@ class DepartmentController extends ApiController
         return $this->success($departments, 200);
     }
 
+    public function list()
+    {
+        $departments = Department::get();
+        $departments = collect($departments)->pluck('name', 'id');
+
+        return $this->success($departments, 200);
+    }
+
     public function show($id)
     {
         $department = Department::find($id);

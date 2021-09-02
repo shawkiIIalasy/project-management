@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth:sanctum', 'json.response']], function () {
     Route::post('logout', [UserController::class, 'logout']);
 
     Route::get('departments', [DepartmentController::class, 'index']);
+    Route::get('departments/list', [DepartmentController::class, 'list']);
     Route::post('departments', [DepartmentController::class, 'store']);
     Route::post('departments/{id}', [DepartmentController::class, 'update']);
     Route::get('departments/{id}', [DepartmentController::class, 'show']);
@@ -38,5 +39,9 @@ Route::group(['middleware' => ['auth:sanctum', 'json.response']], function () {
 
     Route::get('employees', [EmployeeController::class, 'index']);
     Route::get('employees/list', [EmployeeController::class, 'list']);
+    Route::post('employees', [EmployeeController::class, 'store']);
+    Route::post('employees/{id}', [EmployeeController::class, 'update']);
+    Route::get('employees/{id}', [EmployeeController::class, 'show']);
+
 
 });

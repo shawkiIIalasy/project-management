@@ -95,6 +95,24 @@ const routes = [
         component: () => import('../views/Dashboard/Employees/index')
     },
     {
+        path: '/employees',
+        name: 'EmployeeCreate',
+        beforeEnter: AuthenticatedManager,
+        component: () => import('../views/Dashboard/Employees/create')
+    },
+    {
+        path: '/employees/:id/edit',
+        name: 'EmployeeUpdate',
+        beforeEnter: AuthenticatedManager,
+        component: () => import('../views/Dashboard/Employees/update')
+    },
+    {
+        path: '/employees/:id',
+        name: 'EmployeeView',
+        beforeEnter: Authenticated,
+        component: () => import('../views/Dashboard/Employees/view')
+    },
+    {
         path: '/login',
         name: 'Login',
         beforeEnter: LoggedIn,
