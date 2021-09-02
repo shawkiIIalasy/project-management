@@ -57,5 +57,11 @@ class AuthServiceProvider extends ServiceProvider
                 ? Response::allow()
                 : Response::deny('You don\'t have access to this location.');
         });
+
+        Gate::define('employee', function (User $user) {
+            return empty($user->manage_id) || !empty($user->manage_id)
+                ? Response::allow()
+                : Response::deny('You don\'t have access to this location.');
+        });
     }
 }

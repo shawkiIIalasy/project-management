@@ -67,7 +67,7 @@ const routes = [
     {
         path: '/projects',
         name: 'Projects',
-        beforeEnter: AuthenticatedManager,
+        beforeEnter: Authenticated,
         component: () => import('../views/Dashboard/Projects/index')
     },
     {
@@ -87,6 +87,12 @@ const routes = [
         name: 'ProjectUpdate',
         beforeEnter: AuthenticatedManager,
         component: () => import('../views/Dashboard/Projects/update')
+    },
+    {
+        path: '/employees',
+        name: 'Employees',
+        beforeEnter: AuthenticatedManager,
+        component: () => import('../views/Dashboard/Employees/index')
     },
     {
         path: '/login',
