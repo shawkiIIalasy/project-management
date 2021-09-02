@@ -32,28 +32,16 @@ const useFetch = (url, config = {}) => {
         }
     }
 
-    const fetchWithUrl = async (url, params = {}, config = {}) => {
-        loading.value = true
-        try {
-            const result = await axiosInstance.request({
-                url,
-                params,
-                headers: header(),
-                ...config
-            })
-            response.value = result
-            data.value = result.data
-            success.value = true
-        } catch (e) {
-            error.value = e
-            loading.value = false
-            success.value = false
-        } finally {
-            loading.value = false
-        }
+    const fetchHandel = async (params = {}) => {
+        return  await axiosInstance.request({
+            url,
+            params,
+            headers: header(),
+            ...config
+        })
     }
     !config.skip && fetch()
-    return { data, error, loading, response, success, fetch, fetchWithUrl }
+    return { data, error, loading, response, success, fetch, fetchHandel }
 }
 
 export default useFetch

@@ -44,4 +44,13 @@ class DepartmentController extends ApiController
 
         return $this->success([], 'Department created.', 201);
     }
+
+    public function update($id, DepartmentRequest $request)
+    {
+        $attr = $request->validated();
+
+        $department = Department::where('id' , '=', $id)->update($attr);
+
+        return $this->success($department, 'Department updated.', 200);
+    }
 }
