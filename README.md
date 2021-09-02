@@ -53,7 +53,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="/public/images/manager-dashboard.png" alt="Logo" width="80" height="80">
+<img src="/public/images/manager-dashboard.png" alt="Logo">
 
 is project management system help you to manage your company.
 
@@ -83,7 +83,7 @@ Project Users type:
 * Employee 
 
 ### Manager 
-   ![](/home/spark/code/project-management/public/images/manager-dashboard.png) 
+<img src="/public/images/manager-dashboard.png" alt="Logo">
     1- Login and Register
         Manager can navigate `/register` and filling the user first name and last name and password and Access code 
         * you can use `MAN_123456` as Manager Access code each access code will be valid for only one time.
@@ -98,7 +98,7 @@ Project Users type:
 
 
 ### Employee
-   ![](/home/spark/code/project-management/public/images/employee-dashboard.png)
+<img src="/public/images/employee-dashboard.png" alt="Logo">
     1- Login and Register
 
     Employees can navigate `/register` also and filling the user first name and last name and password and Access code
