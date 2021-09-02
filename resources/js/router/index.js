@@ -52,7 +52,12 @@ const routes = [
         beforeEnter: AuthenticatedManager,
         component: () => import('../views/Dashboard/Departments/create')
     },
-
+    {
+        path: '/departments/:id',
+        name: 'DepartmentView',
+        beforeEnter: Authenticated,
+        component: () => import('../views/Dashboard/Departments/view')
+    },
     {
         path: '/departments/:id/edit',
         name: 'DepartmentUpdate',
