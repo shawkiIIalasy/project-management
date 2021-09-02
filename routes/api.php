@@ -31,17 +31,20 @@ Route::group(['middleware' => ['auth:sanctum', 'json.response']], function () {
     Route::post('departments', [DepartmentController::class, 'store']);
     Route::post('departments/{id}', [DepartmentController::class, 'update']);
     Route::get('departments/{id}', [DepartmentController::class, 'show']);
+    Route::delete('departments/{id}', [DepartmentController::class, 'delete']);
 
     Route::get('projects', [ProjectController::class, 'index']);
     Route::post('projects', [ProjectController::class, 'store']);
     Route::post('projects/{id}', [ProjectController::class, 'update']);
     Route::get('projects/{id}', [ProjectController::class, 'show']);
+    Route::delete('projects/{id}', [ProjectController::class, 'delete']);
 
     Route::get('employees', [EmployeeController::class, 'index']);
     Route::get('employees/list', [EmployeeController::class, 'list']);
     Route::post('employees', [EmployeeController::class, 'store']);
     Route::post('employees/{id}', [EmployeeController::class, 'update']);
     Route::get('employees/{id}', [EmployeeController::class, 'show']);
+    Route::delete('employees/{id}', [EmployeeController::class, 'delete']);
 
 
 });

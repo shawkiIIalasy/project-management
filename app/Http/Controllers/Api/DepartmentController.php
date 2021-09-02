@@ -66,4 +66,15 @@ class DepartmentController extends ApiController
 
         return $this->success($department, 'Department updated.', 200);
     }
+
+    public function delete($id)
+    {
+        $department = Department::find($id);
+
+        if (empty($department)) {
+            $this->error('Department not found', 403);
+        }
+        $department->delete();
+        return $this->success([], 'Department deleted.', 201);
+    }
 }

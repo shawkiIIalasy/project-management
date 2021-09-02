@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
+use App\Models\User;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
@@ -63,5 +64,16 @@ class ProjectController extends ApiController
         }
 
         return $this->success($project, 'Project updated.', 200);
+    }
+
+    public function delete($id)
+    {
+        $project = Project::find($id);
+
+        if (empty($project)) {
+            $this->error('Project not found', 403);
+        }
+        $project->delete();
+        return $this->success([], 'Project deleted.', 201);
     }
 }

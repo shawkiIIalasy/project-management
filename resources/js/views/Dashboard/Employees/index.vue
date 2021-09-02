@@ -21,11 +21,14 @@
                         <router-link :to="'/employees/'+employee.id+'/edit'">
                             <span class="fa fa-edit"></span>
                         </router-link>
+                        <a href="#" @click="deleteRecord(employee.id)">
+                            <span class="fa fa-trash"></span>
+                        </a>
                     </div>
                     <div class="card-body">
                         <router-link :to="'/employees/' + employee.id">
-                        <h5 class="card-title">{{ employee.first_name }}  {{ employee.last_name }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ employee.email }}</h6>
+                            <h5 class="card-title">{{ employee.first_name }} {{ employee.last_name }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ employee.email }}</h6>
                             <span class="fa fa-arrow-right"></span>
                         </router-link>
                     </div>
@@ -47,7 +50,8 @@
 import DashboardLayout from '../../../layouts/DashboardLayout'
 import useFetch from '../../../compsables/useFetch'
 import VPagination from "@hennge/vue3-pagination";
-import "@hennge/vue3-pagination/dist/vue3-pagination.css";
+import '@hennge/vue3-pagination/dist/vue3-pagination.css'
+import useDelete from '../../../compsables/useDelete'
 
 export default {
     name: 'Employees',
@@ -84,6 +88,19 @@ export default {
             const fetchRequest = useFetch('/employees', {skip: true});
             fetchRequest.fetchHandel().then(response => {
                     this.data = response.data.data
+                },
+                error => {
+                    this.error = error.response.data
+                }
+            )
+        },
+        deleteRecord(id) {
+            const deleteRequest = useDelete('/employees/' + id);
+            deleteRequest.deleteItem().then(
+                response => {
+                    this.data.data.splice(this.data.data.findIndex(function (i) {
+                        return i.id === id;
+                    }), 1);
                 },
                 error => {
                     this.error = error.response.data
