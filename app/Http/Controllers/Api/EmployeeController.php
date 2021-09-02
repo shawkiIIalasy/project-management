@@ -18,7 +18,12 @@ class EmployeeController extends ApiController
 
     public function index()
     {
-        $employees = User::where('manage_id', '=', null)->paginate(request()->all());
+        $employees = User::query()->where('manage_id', '=', null);
+        if(!empty(request()->search)){
+            $employees = $employees->where('email','LIKE','%'.request()->search.'%');
+            request()->offsetUnset('search');
+        }
+        $employees = $employees->paginate(request()->all());
 
         return $this->success($employees, 200);
     }

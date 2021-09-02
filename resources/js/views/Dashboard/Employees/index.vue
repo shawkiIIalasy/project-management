@@ -9,6 +9,12 @@
         </div>
         <div v-else-if="data !== null">
             <h3>Employees</h3>
+
+            <div class="row">
+                <input type="text" v-model="searchField" class="form-control mt-3 mb-5"
+                       placeholder="Search by employee email" @keyup="search">
+            </div>
+
             <div class="row">
                 <div class="card rounded col-12 m-3 p-3" v-for="employee in data.data">
                     <div class="card-header bg-white text-end">
@@ -16,7 +22,7 @@
                             <span class="fa fa-edit"></span>
                         </router-link>
                         <a href="#" @click="deleteRecord(employee.id)">
-                            <span class="fa fa-trash" ></span>
+                            <span class="fa fa-trash"></span>
                         </a>
                     </div>
                     <div class="card-body">
@@ -53,22 +59,51 @@ export default {
         DashboardLayout,
         VPagination
     },
-    setup() {
-        const {data, loading, error} = useFetch('/employees');
-        return {data, loading, error}
+    data() {
+        return {
+            searchField: '',
+            data: null,
+            error: null
+        }
+    },
+    created() {
+        this.fetchAll()
     },
     methods: {
+        search(e) {
+            if (this.searchField.length >= 3) {
+                const searchRequest = useFetch('/employees?search=' + this.searchField, {skip: true})
+                searchRequest.fetchHandel().then(response => {
+                        this.data = response.data.data
+                    },
+                    error => {
+                        this.error = error.response.data
+                    }
+                )
+            } else {
+                this.fetchAll()
+            }
+        },
+        fetchAll() {
+            const fetchRequest = useFetch('/employees', {skip: true});
+            fetchRequest.fetchHandel().then(response => {
+                    this.data = response.data.data
+                },
+                error => {
+                    this.error = error.response.data
+                }
+            )
+        },
         deleteRecord(id) {
-            const deleteRequest  = useDelete('/employees/' + id);
+            const deleteRequest = useDelete('/employees/' + id);
             deleteRequest.deleteItem().then(
                 response => {
-                    this.data.data.splice(this.data.data.findIndex(function(i){
+                    this.data.data.splice(this.data.data.findIndex(function (i) {
                         return i.id === id;
                     }), 1);
                 },
                 error => {
                     this.error = error.response.data
-
                 }
             )
         }

@@ -20,7 +20,12 @@ class DepartmentController extends ApiController
 
     public function index()
     {
-        $departments = Department::paginate(request()->all());
+        $departments = Department::query();
+        if(!empty(request()->search)){
+            $departments = $departments->where('name','LIKE','%'.request()->search.'%');
+            request()->offsetUnset('search');
+        }
+        $departments = $departments->paginate(request()->all());
 
         return $this->success($departments, 200);
     }
