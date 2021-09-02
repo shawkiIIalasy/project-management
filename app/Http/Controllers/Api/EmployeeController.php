@@ -63,4 +63,15 @@ class EmployeeController extends ApiController
 
         return $this->success([], 'Employee updated.', 201);
     }
+
+    public function delete($id)
+    {
+        $user = User::find($id);
+
+        if (empty($user)) {
+            $this->error('User not found', 403);
+        }
+        $user->delete();
+        return $this->success([], 'Employee deleted.', 201);
+    }
 }

@@ -14,6 +14,9 @@
                         <router-link :to="'/departments/'+department.id+'/edit'">
                             <span class="fa fa-edit"></span>
                         </router-link>
+                        <a href="#" @click="deleteRecord(department.id)">
+                            <span class="fa fa-trash" ></span>
+                        </a>
                     </div>
                     <div class="card-body">
                         <router-link :to="'/departments/' + department.id">
@@ -42,6 +45,7 @@ import DashboardLayout from '../../../layouts/DashboardLayout'
 import useFetch from '../../../compsables/useFetch'
 import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
+import useDelete from "../../../compsables/useDelete";
 
 export default {
     name: 'Departments',
@@ -52,6 +56,22 @@ export default {
     setup() {
         const {data, loading, error} = useFetch('/departments');
         return {data, loading, error}
+    },
+    methods: {
+        deleteRecord(id) {
+            const deleteRequest  = useDelete('/departments/' + id);
+            deleteRequest.deleteItem().then(
+                response => {
+                    this.data.data.splice(this.data.data.findIndex(function(i){
+                        return i.id === id;
+                    }), 1);
+                },
+                error => {
+                    this.error = error.response.data
+
+                }
+            )
+        }
     }
 }
 </script>
