@@ -1,10 +1,11 @@
 <template>
     <Dashboard-Layout>
+        <router-link :to="{name: 'Departments'}" class="btn btn-primary fa fa-arrow-alt-circle-left mb-5">Departments</router-link>
         <div class="alert alert-danger" role="alert" v-if="error !== null">
             {{ error.message }}
         </div>
-        <div v-else>
-            <h1>Department: {{data.department.name}}</h1>
+        <div v-else-if="data !== null">
+            <h3>Department: {{data.department.name}}</h3>
             <p>Description: {{data.department.description}}</p>
             <div>
                 <ul>

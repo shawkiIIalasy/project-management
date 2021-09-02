@@ -1,10 +1,9 @@
 <template>
     <Dashboard-Layout>
-        <router-link :to="{name: 'Departments'}" class="btn btn-primary fa fa-arrow-alt-circle-left mb-5">Departments</router-link>
         <div class="alert alert-danger" role="alert" v-if="error !== null">
             {{ error.message }}
         </div>
-        <h3>Create Department</h3>
+        <h3>Update Department</h3>
         <form @submit.prevent="create">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -39,7 +38,7 @@ import DashboardLayout from '../../../layouts/DashboardLayout'
 import usePost from '../../../compsables/usePost'
 
 export default {
-    name: 'DepartmentCreate',
+    name: 'DepartmentUpdate',
     components: {
         DashboardLayout
     },
@@ -51,7 +50,7 @@ export default {
         }
     },
     methods: {
-        async create() {
+        async update() {
             const {post} = usePost('/departments');
             post({
                 name: this.name,

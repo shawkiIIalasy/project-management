@@ -10,6 +10,15 @@ const Authenticated = (to, from, next) => {
     next('/login')
 }
 
+const AuthenticatedManager = (to, from, next) => {
+    store.dispatch("auth/authenticated")
+    if (store.state.auth.status.loggedIn && store.state.auth.user.is_manager) {
+        next()
+        return
+    }
+    next('/login')
+}
+
 const LoggedIn = (to, from, next) => {
     if (store.state.auth.status.loggedIn) {
         next('/dashboard')
@@ -34,13 +43,13 @@ const routes = [
     {
         path: '/departments',
         name: 'Departments',
-        beforeEnter: Authenticated,
+        beforeEnter: AuthenticatedManager,
         component: () => import('../views/Dashboard/Departments/index')
     },
     {
         path: '/departments/create',
         name: 'DepartmentCreate',
-        beforeEnter: Authenticated,
+        beforeEnter: AuthenticatedManager,
         component: () => import('../views/Dashboard/Departments/create')
     },
     {
