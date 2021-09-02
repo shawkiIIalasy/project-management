@@ -21,7 +21,7 @@ const AuthenticatedManager = (to, from, next) => {
 
 const LoggedIn = (to, from, next) => {
     if (store.state.auth.status.loggedIn) {
-        next('/dashboard')
+        next('/projects')
         return
     }
     next()
@@ -67,7 +67,7 @@ const routes = [
     {
         path: '/projects',
         name: 'Projects',
-        beforeEnter: AuthenticatedManager,
+        beforeEnter: Authenticated,
         component: () => import('../views/Dashboard/Projects/index')
     },
     {
@@ -87,6 +87,30 @@ const routes = [
         name: 'ProjectUpdate',
         beforeEnter: AuthenticatedManager,
         component: () => import('../views/Dashboard/Projects/update')
+    },
+    {
+        path: '/employees',
+        name: 'Employees',
+        beforeEnter: AuthenticatedManager,
+        component: () => import('../views/Dashboard/Employees/index')
+    },
+    {
+        path: '/employees',
+        name: 'EmployeeCreate',
+        beforeEnter: AuthenticatedManager,
+        component: () => import('../views/Dashboard/Employees/create')
+    },
+    {
+        path: '/employees/:id/edit',
+        name: 'EmployeeUpdate',
+        beforeEnter: AuthenticatedManager,
+        component: () => import('../views/Dashboard/Employees/update')
+    },
+    {
+        path: '/employees/:id',
+        name: 'EmployeeView',
+        beforeEnter: Authenticated,
+        component: () => import('../views/Dashboard/Employees/view')
     },
     {
         path: '/login',

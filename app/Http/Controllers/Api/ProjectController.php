@@ -31,9 +31,8 @@ class ProjectController extends ApiController
         if (empty($project)) {
             return $this->error('Project not exists.', 403);
         }
-        $users = collect($project->users)->pluck('email', 'id');
 
-        return $this->success(['project' => $project, 'users' => $users]);
+        return $this->success(['project' => $project, 'users' => $project->users]);
     }
 
     public function store(ProjectRequest $request)
@@ -53,6 +52,7 @@ class ProjectController extends ApiController
 
         $project = Project::find($id);
         if ($project->update($attr)) {
+            $project->users()->detach();
             $project->users()->attach($request->get('users'));
         }
 
