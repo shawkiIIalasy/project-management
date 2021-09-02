@@ -13,8 +13,8 @@
                         <i class='fa fa-building nav_icon'></i>
                         <span class="nav_name">Departments</span>
                     </router-link>
-                    <router-link v-show="isManager" :to="{name: 'Employees'}" class="nav_link"><i
-                        class='fa fa-users nav_icon'></i>
+                    <router-link v-show="isManager" :to="{name: 'Employees'}" class="nav_link">
+                        <i class='fa fa-users nav_icon'></i>
                         <span class="nav_name">Employees</span>
                     </router-link>
                 </div>

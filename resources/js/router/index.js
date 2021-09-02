@@ -21,7 +21,7 @@ const AuthenticatedManager = (to, from, next) => {
 
 const LoggedIn = (to, from, next) => {
     if (store.state.auth.status.loggedIn) {
-        next('/dashboard')
+        next('/projects')
         return
     }
     next()
