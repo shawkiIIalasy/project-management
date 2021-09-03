@@ -120,6 +120,9 @@ Access code on register form
  2. also can be an manager access code to allow manager to register to platform.
 
 
+Manager Access code will be valid for only one manage.
+Employee(Department access code) Access code will be valid for any employee on the department.
+
 ### Prerequisites
 
 * Apache Server
