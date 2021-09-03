@@ -22,7 +22,7 @@
                         </li>
                         <li class="nav-item d-inline-block" role="presentation">
                             <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                                    type="button" role="tab" aria-controls="profile" aria-selected="false">Hirer
+                                    type="button" role="tab" aria-controls="profile" aria-selected="false">Manager
                             </button>
                         </li>
                     </ul>
@@ -131,7 +131,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <h3 class="register-heading">Apply as a Hirer</h3>
+                            <h3 class="register-heading">Apply as a Manager</h3>
                             <div class="row register-form">
                                 <div class="form-group row">
                                     <div class="col-md-6">
