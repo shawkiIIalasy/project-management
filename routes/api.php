@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['json.response'])->group(function () {
     Route::post('login', [UserController::class, 'login']);
     Route::post('register', [UserController::class, 'register']);
+    Route::post('register-manager', [UserController::class, 'registerManager']);
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'json.response']], function () {

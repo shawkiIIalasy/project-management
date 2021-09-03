@@ -92,6 +92,12 @@ Project Users type:
         
         Manager can navigate `/login` and login by the user credentials
 
+Login screen:
+<img src="/public/images/login.png" alt="Logo">
+
+Register screen:
+<img src="/public/images/manager-register.png" alt="Logo">
+    
     2- Responsibility
 
         Managers are responsible on [Create, Update, Delete, List] Employee, Departments, and Projects
@@ -107,6 +113,12 @@ Project Users type:
             * Employees can't register without access code.
 
     Employees can navigate `/login` and login by the user credentials
+    
+Login screen:
+<img src="/public/images/login.png" alt="Logo">
+    
+Register screen:
+<img src="/public/images/employee-register.png" alt="Logo">
 
     2- Responsibility
 
@@ -119,6 +131,9 @@ Access code on register form
  1. can be an auto generate code when the department created to allow employees to register accessed department.
  2. also can be an manager access code to allow manager to register to platform.
 
+
+Manager Access code will be valid for only one manage.
+Employee(Department access code) Access code will be valid for any employee on the department.
 
 ### Prerequisites
 

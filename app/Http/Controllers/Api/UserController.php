@@ -22,25 +22,43 @@ class UserController extends Controller
     {
         $attr = $request->validated();
 
-        $manage = Manage::where('access_code', $attr['access_code'])->first();
         $department = Department::where('access_code', $attr['access_code'])->first();
 
-        if (empty($manage) && empty($department)) {
+        if ( empty($department)) {
             return $this->error('Access code invalid', 401);
         }
 
-        if(!empty($manage)){
-            $attr['manage_id'] = $manage->id;
-        }
 
         $user = User::create($attr);
+
         if(!empty($department)){
             $department->users()->save($user);
         }
 
-        !empty($manage) ? $manage->delete(): false;
         return $this->success([]);
     }
+    /**
+     * Register
+     */
+    public function registerManager(RegisterRequest $request)
+    {
+        $attr = $request->validated();
+
+        $manage = Manage::where('access_code', $attr['access_code'])->first();
+
+        if (empty($manage)) {
+            return $this->error('Manage Access code invalid', 401);
+        }
+
+        $attr['manage_id'] = $manage->id;
+
+        User::create($attr);
+
+        !empty($manage) ? $manage->delete(): false;
+
+        return $this->success([]);
+    }
+
 
     /**
      * Login

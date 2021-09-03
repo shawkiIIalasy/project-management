@@ -40,6 +40,16 @@ class AuthService {
         });
     }
 
+    registerManager(user) {
+        return axiosInstance.post('/register-manager', {
+            first_name: user.first_name,
+            last_name: user.last_name,
+            email: user.email,
+            password: user.password,
+            access_code: user.access_code
+        });
+    }
+
     authenticated(){
         axiosInstance.defaults.headers = header()
         return axiosInstance.get('/authenticated')

@@ -1,36 +1,63 @@
 <template>
     <Home-Layout>
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-8">
-
-                <div class="alert alert-danger" role="alert" v-if="error !== null">
-                    {{ error }}
+        <div class="container register">
+            <div class="row register-frame">
+                <div class="col-md-3 register-left">
+                    <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                    <h3>Welcome</h3>
+                    <p>Manage your company.</p>
+                    <router-link :to="{name: 'Register'}" class="btn link">
+                        Register
+                    </router-link>
+                    <br/>
                 </div>
-
-                <div class="card card-default">
-                    <div class="card-header">Login</div>
-                    <div class="card-body">
-                        <form @submit.prevent="handleSubmit">
-                            <div class="form-group row">
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail
-                                    Address</label>
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" v-model="email" required
+                <div class="col-md-9 register-right">
+                    <h3 class="register-heading">Login</h3>
+                    <div class="row register-form">
+                        <div class="alert alert-danger" role="alert" v-if="error !== null">
+                            {{ error.message }}
+                        </div>
+                        <form @submit.prevent="handleSubmit" class="position-relative">
+                            <div class="form-group row m-3">
+                                <div class="col">
+                                    <input id="email" type="email"
+                                           v-model="email"
+                                           :class="{'form-control':true, 'is-invalid': error !== null && error.errors != null && error.errors.email != null}"
+                                           placeholder="Email"
+                                           required
                                            autofocus autocomplete="off">
+                                    <div class="invalid-feedback"
+                                         v-if="error !== null && error.errors != null && error.errors.email != null">
+                                        <ul>
+                                            <li v-for="error in error.errors.email">
+                                                {{ error }}
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" v-model="password"
+                            <div class="form-group row m-3">
+                                <div class="col">
+                                    <input id="password" type="password"
+                                           v-model="password"
+                                           :class="{'form-control':true, 'is-invalid': error !== null && error.errors != null && error.errors.password != null}"
+                                           placeholder="Password"
                                            required autocomplete="off">
+                                    <div class="invalid-feedback"
+                                         v-if="error !== null && error.errors != null && error.errors.password != null">
+                                        <ul>
+                                            <li v-for="error in error.errors.password">
+                                                {{ error }}
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                            <div class="form-group row m-3">
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary w-100">
                                         Login
                                     </button>
                                 </div>
@@ -72,7 +99,7 @@ export default {
                 },
                 (e) => {
                     this.loading = false;
-                    this.error = e.response.data.message
+                    this.error = e.response.data
                 }
             )
         }
