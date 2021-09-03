@@ -13,7 +13,7 @@
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/shawkiIIalasy/project-management">View Demo</a>
+    <a href="http://ec2-3-67-224-204.eu-central-1.compute.amazonaws.com">View Demo</a>
     ·
     <a href="https://github.com/shawkiIIalasy/project-management/issues">Report Bug</a>
     ·
@@ -57,6 +57,7 @@
 
 is project management system help you to manage your company.
 
+Project: [Demo](http://ec2-3-67-224-204.eu-central-1.compute.amazonaws.com)
 
 
 ### Built With
@@ -166,7 +167,15 @@ Access code on register form
    ```
     php artisan db:seed
    ```
-9. Enjoy
+9. Install Npm
+   ```sh
+   npm install
+   ```
+10. Run npm prod
+    ```
+    npm run prod
+     ```
+11. Enjoy
 
 
 
