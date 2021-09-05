@@ -114,6 +114,7 @@ Register screen:
     Employees can navigate `/register` also and filling the user first name and last name and password and Access code
             * Access code for employee will directly assign the user to the department.
             * Employees can't register without access code.
+            * you can use `EMP_3b43ce62-1b84-4821-9f3f-61375b20f332` as Department Access code.
 
     Employees can navigate `/login` and login by the user credentials
     
