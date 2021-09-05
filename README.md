@@ -59,6 +59,9 @@ is project management system help you to manage your company.
 
 Project: [Demo](http://ec2-35-158-161-0.eu-central-1.compute.amazonaws.com)
 
+### Er-Diagram
+<img src="/public/images/er-diagram.png" alt="Logo">
+
 
 ### Built With
 This project built by REST-based APIs
